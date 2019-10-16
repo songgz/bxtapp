@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import {HttpClient} from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-homing',
@@ -12,24 +13,25 @@ export class HomingPage implements OnInit {
   private cItem: any;
 
   constructor(
-      private http: HttpClient
+      private http: HttpClient,
+      private router: Router
   ) { }
 
   getItems(ev: any) {
     const val = ev.target.value;
     this.http.get( 'http://127.0.0.1:3000/homings.json?key=' + val ).subscribe( ( data: any) => {
       this.cItem = data.result;
-      console.log(this.cItem);
+      // console.log(this.cItem);
     });
   }
   itemSelected(item: any) {
-    console.log(item);
+    // console.log(item);
+    this.router.navigate(['/student'],{queryParams:{key: item.id }});
   }
   ngOnInit() {
-    this.http.get( 'http://127.0.0.1:3000/homings.json?facility_id=5cc6c62488dba063c4048a25').subscribe( ( data: any) => {
-      this.cItem = data.result;
-      console.log(this.cItem);
-    });
+    // this.http.get( 'http://127.0.0.1:3000/homings.json?facility_id=5cc6c62488dba063c4048a25').subscribe( ( data: any) => {
+    //   this.cItem = data.result;
+    // });
   }
 
 }
