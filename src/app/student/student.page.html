@@ -6,15 +6,32 @@
 
 <ion-content>
   <ion-card>
-    <ion-card>
-      <img src="" alt="">
-      <ion-card-header>
-        <ion-card-subtitle>学号</ion-card-subtitle>
-        <ion-card-title>{{student}}</ion-card-title>
-      </ion-card-header>
-      <ion-card-content>
-       
-      </ion-card-content>
-    </ion-card>
+    <img src="" alt="" onerror="javascript:this.src='/assets/img/imghead.png'" (click)="add()">
+    <!-- <ion-card-header>
+        <ion-card-subtitle>{{student.sno}}</ion-card-subtitle>
+        <ion-card-title>{{student.name}}</ion-card-title>
+      </ion-card-header> -->
+    <ion-card-content>
+      <ion-item>
+        <ion-icon name="happy" slot="start"></ion-icon>
+        <ion-label>{{student.name}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="logo-buffer" slot="start"></ion-icon>
+        <ion-label>{{student.sno}}</ion-label>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="home" slot="start"></ion-icon>
+        <p>{{student.dorm_full_title}}</p>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="transgender" slot="start"></ion-icon>
+        <ion-label>{{student.gender_mark}}</ion-label>
+      </ion-item>
+      <ion-item>
+          <ion-icon name="walk" slot="start"></ion-icon>
+          <ion-label>{{student.direction_at_last}}</ion-label>
+        </ion-item>
+    </ion-card-content>
   </ion-card>
 </ion-content>
