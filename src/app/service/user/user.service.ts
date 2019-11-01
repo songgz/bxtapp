@@ -12,9 +12,9 @@ export class UserService {
       private storage: StorageService
   ) {}
   login(params: any) {
-    this.router.navigateByUrl('/home');
+    // this.router.navigateByUrl('/home');
 
-/*
+
     const url1 = 'http://127.0.0.1:3000/sessions.json';
     // 显示等待样式
     this.http.showLoading('努力登录中...');
@@ -27,8 +27,10 @@ export class UserService {
       if (res) {
         // 网络请求成功
         console.log('login success');
-        if (res.success) {
-          this.storage.write('userInfo', res.data);
+        localStorage.setItem('currentUser', JSON.stringify(res));
+        if (res.refresh) {
+          // this.storage.write('userInfo', res.data);
+          localStorage.setItem('refreshToken', JSON.stringify({refresh: res.refresh, refresh_expires_at: res.refresh_expires_at}));
           // 成功
           //  this.navCtrl.navigateForward('/home',true,{queryParams:{name:'Tom'}});
           this.router.navigateByUrl('/home');
@@ -42,6 +44,6 @@ export class UserService {
           console.log(msg);
         }
       }
-    });*/
+    });
   }
 }

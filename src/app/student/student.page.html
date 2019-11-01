@@ -6,7 +6,10 @@
 
 <ion-content>
   <ion-card>
-    <img src="" alt="" onerror="javascript:this.src='/assets/img/imghead.png'" (click)="add()">
+    <img [src]='headerImage' alt="" onerror="javascript:this.src='/assets/img/imghead.png'" (click)="add()">
+    <!-- <ion-button (click)="add()">
+        拍照
+    </ion-button> -->
     <!-- <ion-card-header>
         <ion-card-subtitle>{{student.sno}}</ion-card-subtitle>
         <ion-card-title>{{student.name}}</ion-card-title>
@@ -22,16 +25,27 @@
       </ion-item>
       <ion-item>
         <ion-icon name="home" slot="start"></ion-icon>
-        <p>{{student.dorm_full_title}}</p>
+        <ion-text>
+          <h3>{{student.dorm_full_title}}</h3>
+        </ion-text>
       </ion-item>
       <ion-item>
         <ion-icon name="transgender" slot="start"></ion-icon>
-        <ion-label>{{student.gender_mark}}</ion-label>
+        <p>{{student.gender_mark}}</p>
       </ion-item>
       <ion-item>
-          <ion-icon name="walk" slot="start"></ion-icon>
-          <ion-label>{{student.direction_at_last}}</ion-label>
-        </ion-item>
+        <ion-icon name="walk" slot="start"></ion-icon>
+        <ion-text slot="end">
+          <h3>{{student.direction_at_last}}</h3>
+        </ion-text>
+      </ion-item>
+      <ion-item>
+        <ion-icon name="transgender" slot="start"></ion-icon>
+        <ion-select placeholder="性别" slot="end" disabled='false' cancelText='取消' okText='确定' interface="action-sheet">
+          <ion-select-option value="f">男</ion-select-option>
+          <ion-select-option value="m">女</ion-select-option>
+        </ion-select>
+      </ion-item>
     </ion-card-content>
   </ion-card>
 </ion-content>

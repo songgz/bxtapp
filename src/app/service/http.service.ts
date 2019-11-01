@@ -178,6 +178,7 @@ export class HttpService {
    */
   async showLoading(content: string) {
     if (!this.isLoadingOpen) {
+      this.isLoadingOpen = true;
       const loading = await this.loadingCtrl.create({
         message: content,
         duration: 5000,
