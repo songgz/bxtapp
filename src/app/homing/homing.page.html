@@ -10,9 +10,8 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-select value="id2" okText="确定" cancelText="取消">
-      <ion-select-option value="id2">2公寓</ion-select-option>
-      <ion-select-option value="id3">3公寓</ion-select-option>
+    <ion-select [(ngModel)]="query.id" okText="确定" cancelText="取消" (ionChange)="changeHouse()">
+      <ion-select-option [value]="house.id" *ngFor="let house of houses" > {{ house.title }} </ion-select-option>
     </ion-select>
   <ion-searchbar placeholder='请输入姓名或学号' (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list>

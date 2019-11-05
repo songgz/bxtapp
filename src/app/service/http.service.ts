@@ -178,7 +178,6 @@ export class HttpService {
    */
   async showLoading(content: string) {
     if (!this.isLoadingOpen) {
-      this.isLoadingOpen = true;
       const loading = await this.loadingCtrl.create({
         message: content,
         duration: 5000,
@@ -210,7 +209,7 @@ export class HttpService {
    * 使用本地缓存的方式来获取token信息
    */
   getToken() {
-    return window.localStorage.getItem('app-video-ai-token');
+    return window.localStorage.getItem('currentUser');
   }
 
   /*
@@ -221,13 +220,13 @@ export class HttpService {
     // 目前只解析token字段，缓存先只存该字段
     //  + token.name + token.email + token.avatar + token.id + token.time
     // JSON.stringify(token)
-    window.localStorage.setItem('app-video-ai-token', token.token);
+    window.localStorage.setItem('currentUser', token.token);
   }
 
   /**
    * 清理token
    */
   clearToken() {
-    window.localStorage.setItem('app-video-ai-token', null);
+    window.localStorage.setItem('currentUser', null);
   }
 }
