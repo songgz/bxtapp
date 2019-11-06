@@ -1,4 +1,3 @@
-
 <ion-header>
   <ion-toolbar>
     <ion-buttons slot="start">
@@ -10,10 +9,33 @@
   </ion-toolbar>
 </ion-header>
 <ion-content>
-    <ion-select [(ngModel)]="query.id" okText="确定" cancelText="取消" (ionChange)="changeHouse()">
-      <ion-select-option [value]="house.id" *ngFor="let house of houses" > {{ house.title }} </ion-select-option>
-    </ion-select>
-  <ion-searchbar placeholder='请输入姓名或学号' (ionInput)="getItems($event)"></ion-searchbar>
+  <ion-refresher slot="fixed" (ionRefresh)="doRefresh($event)">
+    <ion-refresher-content></ion-refresher-content>
+  </ion-refresher>
+  <ion-grid>
+    <ion-row>
+      <ion-col size="6">
+        <ion-select [(ngModel)]="houseId" placeholder='楼栋' okText="确定" cancelText="取消" (ionChange)="changeHouse()">
+          <ion-select-option [value]="house.id" *ngFor="let house of houses"> {{ house.title }} </ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="6">
+        <ion-select [(ngModel)]="floorId" placeholder='楼层' okText="确定" cancelText="取消" (ionChange)="changeFloor()">
+          <ion-select-option [value]="floor.id" *ngFor="let floor of floors"> {{ floor.title }} </ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="6">
+        <ion-select [(ngModel)]="roomId" placeholder='房间' okText="确定" cancelText="取消" (ionChange)="changeRoom()">
+          <ion-select-option [value]="room.id" *ngFor="let room of rooms"> {{ room.title }} </ion-select-option>
+        </ion-select>
+      </ion-col>
+      <ion-col size="6">
+
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+  <ion-searchbar [(ngModel)]="searchQuery" placeholder='请输入姓名或学号' (ionInput)="getItems($event)"></ion-searchbar>
   <ion-list>
     <ion-item *ngFor="let item of cItem" (click)="itemSelected(item)">
       <ion-thumbnail slot="start">
@@ -30,5 +52,5 @@
       </ion-label>
     </ion-item>
   </ion-list>
-  
+
 </ion-content>
