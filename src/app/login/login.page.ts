@@ -8,6 +8,8 @@ import { UserService } from '../service/user/user.service';
 })
 export class LoginPage implements OnInit {
   status = true;
+  username: any;
+  password: any;
   constructor(
       private navCtrl: NavController,
       private userService: UserService,
@@ -17,8 +19,8 @@ export class LoginPage implements OnInit {
   }
   onLogin() {
     this.userService.login({
-      username: 'super',
-      password: 'bxt-super'
+      username: this.username,
+      password: this.password
       // version: '18'
     });
   }

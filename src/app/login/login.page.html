@@ -14,11 +14,11 @@
 
     <ion-item>
       <ion-icon name="contact" slot="start" color="primary"></ion-icon>
-      <ion-input placeholder="请输入账号" clearInput ></ion-input>
+      <ion-input placeholder="请输入账号" clearInput [(ngModel)] = "username"></ion-input>
     </ion-item>
     <ion-item>
       <ion-icon name="key" slot="start" color="danger"></ion-icon>
-      <ion-input placeholder="请输入密码" type="password" clearInput ></ion-input>
+      <ion-input placeholder="请输入密码" type="password" clearInput [(ngModel)] = "password"></ion-input>
     </ion-item>
     <ion-card-content>
       <ion-button class="login"

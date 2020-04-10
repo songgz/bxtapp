@@ -30,8 +30,7 @@ export class StudentPage implements OnInit {
       });
     });
   }
-  add() {
-    // alert('1');
+  openCamera() {
     const options: CameraOptions = {
       quality: 100,   // 图片质量
       destinationType: this.camera.DestinationType.DATA_URL, // 返回类型 .FILE_URI 返回文件地址 .DATA_URL 返回base64编码
@@ -41,7 +40,7 @@ export class StudentPage implements OnInit {
       allowEdit: true, // 允许编辑
       targetWidth: 300, // 缩放图片的宽度
       targetHeight: 300, // 缩放图片的高度
-      saveToPhotoAlbum: false, // 是否保存到相册
+      saveToPhotoAlbum: true, // 是否保存到相册
       correctOrientation: true, // 设置摄像机拍摄的图像是否为正确的方向
     };
     this.camera.getPicture(options).then((imageData) => {
@@ -49,6 +48,11 @@ export class StudentPage implements OnInit {
       // imageData is either a base64 encoded string or a file URI
       // If it's base64 (DATA_URL):
       this.headerImage = 'data:image/jpeg;base64,' + imageData || '/assets/img/imghead.png';
+      console.log('got file: ' + imageData);
+
+      // If it's base64:
+      let base64Image = 'data:image/jpeg;base64,' + imageData;
+
     }, (err) => {
       // Handle error
       console.log(err);

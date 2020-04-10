@@ -184,6 +184,7 @@ export class HttpService {
         translucent: true
       });
       console.log('showLoading....');
+      this.isLoadingOpen = true;
       return await loading.present();
     }
   }
@@ -192,6 +193,8 @@ export class HttpService {
    */
   async hideLoading() {
     console.log('hideLoading....');
+    console.log(this.isLoadingOpen);
+
     if (this.isLoadingOpen) {
       await this.loadingCtrl.dismiss();
       this.isLoadingOpen = false;

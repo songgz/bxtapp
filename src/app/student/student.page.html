@@ -6,14 +6,14 @@
 
 <ion-content>
   <ion-card>
-    <img [src]='headerImage' alt="" onerror="javascript:this.src='/assets/img/imghead.png'" (click)="add()">
-    <!-- <ion-button (click)="add()">
-        拍照
-    </ion-button> -->
+    <img [src]='headerImage' alt="" onerror="javascript:this.src='/assets/img/imghead.png'">
+    <ion-button (click)="openCamera()">
+      打开相机
+    </ion-button>
     <!-- <ion-card-header>
-        <ion-card-subtitle>{{student.sno}}</ion-card-subtitle>
-        <ion-card-title>{{student.name}}</ion-card-title>
-      </ion-card-header> -->
+      <ion-card-subtitle>{{student.sno}}</ion-card-subtitle>
+      <ion-card-title>{{student.name}}</ion-card-title>
+    </ion-card-header> -->
     <ion-card-content>
       <ion-item>
         <ion-icon name="happy" slot="start"></ion-icon>

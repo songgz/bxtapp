@@ -18,15 +18,18 @@ export class UserService {
     const url1 = 'http://127.0.0.1:3000/sessions.json';
     // 显示等待样式
     this.http.showLoading('努力登录中...');
+
     return this.http.POST(url1, params, (res, error) => {
       this.http.hideLoading();
       if (error) {
         // 网络请求出现错误
         console.log('err=' + error);
+        this.http.showLoading('登录失败...');
       }
       if (res) {
         // 网络请求成功
         console.log('login success');
+        // 关闭加载
         localStorage.setItem('currentUser', JSON.stringify(res));
         if (res.refresh) {
           // this.storage.write('userInfo', res.data);
@@ -42,6 +45,7 @@ export class UserService {
             msg = '操作失败！';
           }
           console.log(msg);
+          this.http.showLoading('操作失败！...');
         }
       }
     });
