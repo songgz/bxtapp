@@ -6,10 +6,10 @@
 
 <ion-content>
   <ion-card>
-    <img [src]='headerImage' alt="" onerror="javascript:this.src='/assets/img/imghead.png'">
-    <ion-button (click)="openCamera()">
+    <!-- <img [src]='headerImage' alt="" onerror="javascript:this.src='/assets/img/imghead.png'"> -->
+    <!-- <ion-button (click)="openCamera()">
       打开相机
-    </ion-button>
+    </ion-button> -->
     <!-- <ion-card-header>
       <ion-card-subtitle>{{student.sno}}</ion-card-subtitle>
       <ion-card-title>{{student.name}}</ion-card-title>
@@ -17,35 +17,44 @@
     <ion-card-content>
       <ion-item>
         <ion-icon name="happy" slot="start"></ion-icon>
-        <ion-label>{{student.name}}</ion-label>
+        <ion-text slot="end">{{student.name}}</ion-text>
       </ion-item>
       <ion-item>
         <ion-icon name="logo-buffer" slot="start"></ion-icon>
-        <ion-label>{{student.sno}}</ion-label>
+        <ion-text slot="end">{{student.sno}}</ion-text>
       </ion-item>
       <ion-item>
         <ion-icon name="home" slot="start"></ion-icon>
-        <ion-text>
+        <ion-text slot="end">
           <h3>{{student.dorm_full_title}}</h3>
         </ion-text>
       </ion-item>
-      <ion-item>
+      <!-- <ion-item>
         <ion-icon name="transgender" slot="start"></ion-icon>
         <p>{{student.gender_mark}}</p>
-      </ion-item>
+      </ion-item> -->
       <ion-item>
         <ion-icon name="walk" slot="start"></ion-icon>
         <ion-text slot="end">
-          <h3>{{student.direction_at_last}}</h3>
+          <h3 [style.color]="colorDirection[student.direction_at_last]">{{directionType[student.direction_at_last]}}</h3>
         </ion-text>
       </ion-item>
       <ion-item>
         <ion-icon name="transgender" slot="start"></ion-icon>
-        <ion-select placeholder="性别" slot="end" disabled='false' cancelText='取消' okText='确定' interface="action-sheet">
-          <ion-select-option value="f">男</ion-select-option>
-          <ion-select-option value="m">女</ion-select-option>
+        <ion-select 
+        placeholder="性别" 
+        slot="end" 
+        disabled='false' 
+        cancelText='取消' 
+        okText='确定' 
+        interface="action-sheet"
+        [(ngModel)]="student.gender_mark" 
+        name="gender_mark">
+          <ion-select-option *ngFor="let gender of genders" [value]="gender.mark">
+            {{gender.title}}</ion-select-option>
         </ion-select>
       </ion-item>
     </ion-card-content>
   </ion-card>
+  <!-- <p>{{this.genders | json}}</p> -->
 </ion-content>

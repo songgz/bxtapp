@@ -3,6 +3,7 @@ import { HttpClient } from '@angular/common/http';
 import { Router } from '@angular/router';
 import { tokenReference } from '@angular/compiler';
 import { IonInfiniteScroll } from '@ionic/angular';
+import { environment } from '../../environments/environment';
 
 @Component({
   selector: 'app-homing',
@@ -13,7 +14,7 @@ export class HomingPage implements OnInit {
   @ViewChild(IonInfiniteScroll, null) infiniteScroll: IonInfiniteScroll;
 
   searchQuery: any = '';
-  private cItem: any;
+  cItem: any = [];
   houses: any;
   query: any = {};
   floors: any;
@@ -22,6 +23,7 @@ export class HomingPage implements OnInit {
   floorId: any;
   roomId: any;
   dataItem: any;
+  baseUrl: any = environment.baseUrl;
 
   constructor(
     private http: HttpClient,
@@ -31,7 +33,7 @@ export class HomingPage implements OnInit {
   getItems(key: any) {
     const val = key.target.value;
     if (val) {
-      this.http.get('http://127.0.0.1:3000/homings.json?key=' + val + '&facility_id=' + this.query.id)
+      this.http.get( this.baseUrl + 'homings.json?key=' + val + '&facility_id=' + this.query.id)
       .subscribe((dataItem: any) => {
         this.cItem = dataItem.result;
         this.dataItem = dataItem;
@@ -46,14 +48,15 @@ export class HomingPage implements OnInit {
     this.router.navigate(['/student'], { queryParams: { key: item.id } });
   }
   ngOnInit() {
+    // this.baseUrl = environment.baseUrl;
     const currentUser = JSON.parse(localStorage.getItem('currentUser'));
     // console.log(currentUser.access);
-    this.http.get('http://127.0.0.1:3000/houses.json?pre=999', { headers: { Authorization: currentUser.access } })
+    this.http.get( this.baseUrl + 'houses.json?pre=999', { headers: { Authorization: currentUser.access } })
       .subscribe((houses: any) => {
         // console.log(houses.result);
         this.houses = houses.result;
         this.houseId = this.houses[0].id;
-        this.http.get('http://127.0.0.1:3000/floors.json?pre=999&parent_id=' + this.houseId,
+        this.http.get( this.baseUrl + 'floors.json?pre=999&parent_id=' + this.houseId,
           { headers: { Authorization: currentUser.access } }).subscribe((floors: any) => {
             // console.log(floors.result);
             this.floors = floors.result;
@@ -65,12 +68,12 @@ export class HomingPage implements OnInit {
 
     this.searchQuery = null;
     this.query.id = this.houseId;
-    this.http.get('http://127.0.0.1:3000/homings.json?facility_id=' + this.query.id)
+    this.http.get( this.baseUrl + 'homings.json?facility_id=' + this.query.id)
       .subscribe((dataItem: any) => {
         this.dataItem = dataItem;
         this.cItem = dataItem.result;
       });
-    this.http.get('http://127.0.0.1:3000/floors.json?pre=999&parent_id=' + this.query.id,
+    this.http.get( this.baseUrl + 'floors.json?pre=999&parent_id=' + this.query.id,
       { headers: { Authorization: currentUser.access } }).subscribe((floors: any) => {
         this.floors = floors.result;
       });
@@ -84,11 +87,11 @@ export class HomingPage implements OnInit {
 
     this.searchQuery = null;
     this.query.id = this.floorId;
-    this.http.get('http://127.0.0.1:3000/homings.json?facility_id=' + this.query.id).subscribe((dataItem: any) => {
+    this.http.get( this.baseUrl + 'homings.json?facility_id=' + this.query.id).subscribe((dataItem: any) => {
       this.cItem = dataItem.result;
       this.dataItem = dataItem;
     });
-    this.http.get('http://127.0.0.1:3000/rooms.json?pre=999&parent_id=' + this.query.id,
+    this.http.get( this.baseUrl + 'rooms.json?pre=999&parent_id=' + this.query.id,
       { headers: { Authorization: currentUser.access } }).subscribe((rooms: any) => {
         this.rooms = rooms.result;
       });
@@ -97,7 +100,7 @@ export class HomingPage implements OnInit {
   changeRoom() {
     this.searchQuery = null;
     this.query.id = this.roomId;
-    this.http.get('http://127.0.0.1:3000/homings.json?facility_id=' + this.query.id).subscribe((dataItem: any) => {
+    this.http.get( this.baseUrl + 'homings.json?facility_id=' + this.query.id).subscribe((dataItem: any) => {
       this.cItem = dataItem.result;
       this.dataItem = dataItem;
     });
@@ -113,7 +116,7 @@ export class HomingPage implements OnInit {
 
   loadData(event) {
     console.log(this.dataItem.paginate_meta);
-    this.http.get('http://127.0.0.1:3000/homings.json?facility_id=' + this.query.id + '&page=' + this.dataItem.paginate_meta.next_page)
+    this.http.get( this.baseUrl + 'homings.json?facility_id=' + this.query.id + '&page=' + this.dataItem.paginate_meta.next_page)
     .subscribe((dataItem: any) => {
       // this.cItem = dataItem.result;
       // console.log(dataItem);

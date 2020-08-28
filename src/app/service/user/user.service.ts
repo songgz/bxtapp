@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
 import { StorageService } from '../storage/storage.service';
 import { HttpService } from '../http.service';
+import { environment } from '../../../environments/environment';
 @Injectable({
   providedIn: 'root'
 })
@@ -15,7 +16,7 @@ export class UserService {
     // this.router.navigateByUrl('/home');
 
 
-    const url1 = 'http://127.0.0.1:3000/sessions.json';
+    const url1 = environment.baseUrl + 'sessions.json';
     // 显示等待样式
     this.http.showLoading('努力登录中...');
 
